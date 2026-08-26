@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ============================================================================
+  iDesign — Liquid Glass Design System
+  Landing Page HTML Starter Template
+  
+  Landing Page Generator — templates/html_starter.html
+  
+  INSTRUCTIONS FOR AI:
+  - Replace all [PLACEHOLDER] blocks with real content from the page output
+  - Preserve all class names, token references, and structure
+  - Do NOT add inline styles — use classes from tokens.css
+  - Do NOT add ad-hoc colors, radii, or shadows — use token variables
+  - Follow the surface decision tree in references/liquid_glass_design_system.md
+  - Run the self-check gate before delivering this file
+  ============================================================================
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO: Replace with values from Section 2 (SEO Foundation) -->
+  <title>[SEO TITLE — under 60 chars, keyword first]</title>
+  <meta name="description" content="[META DESCRIPTION — under 155 chars, benefit-focused]" />
+  <link rel="canonical" href="https://[DOMAIN]/[URL-SLUG]" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="[SEO TITLE]" />
+  <meta property="og:description" content="[META DESCRIPTION]" />
+  <meta property="og:image"       content="https://[DOMAIN]/og-image.jpg" />
+  <meta property="og:url"         content="https://[DOMAIN]/[URL-SLUG]" />
+  <meta property="og:type"        content="website" />
+
+  <!-- Typography: Inter from Google Fonts (system font fallback in tokens) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Design tokens + utilities -->
+  <link rel="stylesheet" href="tokens.css" />
+
+  <!-- Page-specific styles -->
+  <style>
+    /* ── Sticky Navigation (glass layer) ──────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 var(--pad-x);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      /* Glass: floating layer over content → apply backdrop-filter */
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-filter);
+      -webkit-backdrop-filter: var(--glass-filter);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .nav__logo {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: var(--tracking-tight);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav__cta {
+      font-size: 15px;
+      padding: 10px 20px;
+    }
+
+    /* ── Hero Section ──────────────────────────────────────────────────────── */
+    .hero {
+      padding-block: clamp(80px, 12vw, 140px);
+      text-align: center;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero__headline {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tightest);
+      line-height: 1.05;
+      color: var(--text);
+      max-width: 860px;
+      margin-inline: auto;
+      margin-bottom: 20px;
+    }
+
+    .hero__sub {
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.65;
+      color: var(--text-body);
+      max-width: 580px;
+      margin-inline: auto;
+      margin-bottom: 36px;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero__microcopy {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    /* ── Trust Strip ───────────────────────────────────────────────────────── */
+    .trust-strip {
+      padding-block: 32px;
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .trust-strip__label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-4);
+      margin-bottom: 20px;
+    }
+
+    .trust-strip__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(24px, 4vw, 48px);
+      flex-wrap: wrap;
+    }
+
+    .trust-strip__logo {
+      height: 24px;
+      opacity: 0.35;
+      filter: grayscale(100%);
+      transition: opacity var(--duration-base) var(--ease-out-quart);
+    }
+
+    .trust-strip__logo:hover {
+      opacity: 0.6;
+    }
+
+    /* ── Problem Section ───────────────────────────────────────────────────── */
+    .problem {
+      padding-block: var(--section-py);
+    }
+
+    .problem__headline {
+      text-align: center;
+      max-width: 640px;
+      margin-inline: auto;
+      margin-bottom: 48px;
+    }
+
+    /* Unified panel: one white surface with hairline dividers */
+    .problem__panel {
+      max-width: 760px;
+      margin-inline: auto;
+    }
+
+    /* ── Solution ──────────────────────────────────────────────────────────── */
+    .solution {
+      padding-block: var(--section-py);
+      text-align: center;
+      background: var(--grad-blue);
+      color: #ffffff;
+      border-radius: var(--r-hero);
+    }
+
+    .solution__headline {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tight);
+      line-height: 1.1;
+      color: #ffffff;
+      max-width: 720px;
+      margin-inline: auto;
+      margin-bottom: 16px;
+    }
+
+    .solution__body {
+      font-size: 17px;
+      line-height: 1.75;
+      opacity: 0.85;
+      max-width: 560px;
+      margin-inline: auto;
+      margin-bottom: 36px;
+    }
+
+    .solution .btn--primary {
+      background: rgba(255, 255, 255, 0.20);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      backdrop-filter: saturate(180%) blur(12px);
+      color: #ffffff;
+      box-shadow: none;
+    }
+
+    .solution .btn--primary:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    /* ── Benefits ──────────────────────────────────────────────────────────── */
+    .benefits {
+      padding-block: var(--section-py);
+    }
+
+    .benefits__header {
+      text-align: center;
+      max-width: 580px;
+      margin-inline: auto;
+      margin-bottom: clamp(32px, 5vw, 56px);
+    }
+
+    .benefit-card {
+      padding: 28px 28px 32px;
+    }
+
+    .benefit-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--r-thumb);
+      background: rgba(0, 113, 227, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .benefit-card__title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: var(--tracking-tight);
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .benefit-card__body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-body);
+    }
+
+    /* ── Differentiation ───────────────────────────────────────────────────── */
+    .diff {
+      padding-block: var(--section-py);
+    }
+
+    .diff__header {
+      text-align: center;
+      max-width: 580px;
+      margin-inline: auto;
+      margin-bottom: 40px;
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .compare-table th {
+      padding: 14px 20px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .compare-table td {
+      padding: 14px 20px;
+      color: var(--text-body);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .compare-table .check { color: var(--live); }
+    .compare-table .cross { color: var(--text-4); }
+    .compare-table .us    { color: var(--text); font-weight: 500; }
+
+    /* ── How It Works ──────────────────────────────────────────────────────── */
+    .how {
+      padding-block: var(--section-py);
+    }
+
+    .how__header {
+      text-align: center;
+      max-width: 580px;
+      margin-inline: auto;
+      margin-bottom: 48px;
+    }
+
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      padding: 24px 28px;
+    }
+
+    .step__number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-pill);
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .step__content {}
+    .step__title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .step__body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-body);
+    }
+
+    .step__reassure {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    /* ── Social Proof / Testimonials ───────────────────────────────────────── */
+    .proof {
+      padding-block: var(--section-py);
+    }
+
+    .proof__header {
+      text-align: center;
+      max-width: 480px;
+      margin-inline: auto;
+      margin-bottom: 40px;
+    }
+
+    .testimonial {
+      padding: 28px 28px 32px;
+    }
+
+    .testimonial__quote {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-body);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .testimonial__quote::before {
+      content: '\201C';
+      font-size: 48px;
+      line-height: 0;
+      vertical-align: -18px;
+      color: var(--accent);
+      margin-right: 4px;
+      opacity: 0.4;
+    }
+
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--r-pill);
+      background: var(--track);
+      object-fit: cover;
+    }
+
+    .testimonial__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .testimonial__meta {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    /* ── FAQ ───────────────────────────────────────────────────────────────── */
+    .faq {
+      padding-block: var(--section-py);
+    }
+
+    .faq__header {
+      text-align: center;
+      max-width: 480px;
+      margin-inline: auto;
+      margin-bottom: 40px;
+    }
+
+    .faq__panel {
+      max-width: 720px;
+      margin-inline: auto;
+    }
+
+    details.faq__item {
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    details.faq__item:last-child {
+      border-bottom: none;
+    }
+
+    summary.faq__q {
+      padding: 18px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color var(--duration-fast) var(--ease-out-quart);
+    }
+
+    summary.faq__q:hover { color: var(--accent); }
+
+    summary.faq__q::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-3);
+      transition: transform var(--duration-base) var(--ease-spring);
+    }
+
+    details[open] summary.faq__q::after {
+      transform: rotate(45deg);
+    }
+
+    .faq__a {
+      padding: 0 20px 20px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-body);
+    }
+
+    /* ── About ─────────────────────────────────────────────────────────────── */
+    .about {
+      padding-block: var(--section-py);
+    }
+
+    .about__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+
+    .about__image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--r-card);
+      background: var(--track);
+    }
+
+    .about__label {
+      margin-bottom: 12px;
+    }
+
+    .about__headline {
+      margin-bottom: 16px;
+    }
+
+    .about__body {
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .about__inner { grid-template-columns: 1fr; }
+    }
+
+    /* ── Final CTA ─────────────────────────────────────────────────────────── */
+    .final-cta {
+      padding-block: clamp(64px, 10vw, 120px);
+      text-align: center;
+      background: var(--grad-blue);
+      border-radius: var(--r-hero);
+      margin-block: var(--section-py);
+    }
+
+    .final-cta__headline {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: var(--tracking-tightest);
+      line-height: 1.1;
+      color: #ffffff;
+      max-width: 680px;
+      margin-inline: auto;
+      margin-bottom: 16px;
+    }
+
+    .final-cta__sub {
+      font-size: 17px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.80);
+      max-width: 480px;
+      margin-inline: auto;
+      margin-bottom: 36px;
+    }
+
+    .final-cta__microcopy {
+      margin-top: 16px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* ── Footer ────────────────────────────────────────────────────────────── */
+    .footer {
+      padding-block: 40px;
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__copy {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+
+    .footer__links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer__links a {
+      font-size: 13px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color var(--duration-fast) var(--ease-out-quart);
+    }
+
+    .footer__links a:hover { color: var(--accent); }
+
+    /* ── Mobile sticky CTA ─────────────────────────────────────────────────── */
+    .sticky-cta {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .sticky-cta {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        padding: 12px var(--pad-x) calc(12px + env(safe-area-inset-bottom));
+        background: var(--glass-bg);
+        backdrop-filter: var(--glass-filter);
+        -webkit-backdrop-filter: var(--glass-filter);
+        border-top: 1px solid var(--hairline);
+      }
+
+      .sticky-cta .btn {
+        flex: 1;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NAVIGATION
+       Glass layer — floating over content. backdrop-filter applies here.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <header class="nav" role="banner">
+    <a href="#" class="nav__logo">[BUSINESS NAME]</a>
+    <a href="#cta" class="btn btn--primary nav__cta">[PRIMARY CTA]</a>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO (Section 3.1)
+       Plain content area — solid white surface. No backdrop-filter.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <main>
+    <section class="hero section" aria-label="Hero">
+      <div class="container">
+
+        <!-- Optional eyebrow label -->
+        <div class="hero__eyebrow">
+          <!-- [Optional: e.g. "Now in public beta" or industry vertical] -->
+        </div>
+
+        <!-- REPLACE: Best headline from Section 3.1 -->
+        <h1 class="hero__headline">
+          [HERO HEADLINE]
+        </h1>
+
+        <!-- REPLACE: Best subheading from Section 3.1 -->
+        <p class="hero__sub">
+          [HERO SUBHEADING]
+        </p>
+
+        <div class="hero__actions">
+          <!-- Primary CTA -->
+          <a href="#cta" class="btn btn--primary" id="hero-primary-cta">
+            [PRIMARY CTA TEXT]
+          </a>
+          <!-- Secondary CTA (optional, lower commitment) -->
+          <a href="#how" class="btn btn--secondary" id="hero-secondary-cta">
+            [SECONDARY CTA TEXT]
+          </a>
+        </div>
+
+        <!-- Microcopy beneath CTA (e.g. "No credit card required.") -->
+        <p class="hero__microcopy">[MICROCOPY]</p>
+
+        <!-- Hero visual: product screenshot, lifestyle photo, or illustration -->
+        <!-- REPLACE src and alt with real image -->
+        <div style="margin-top: 56px;">
+          <img
+            src="[HERO IMAGE URL]"
+            alt="[Descriptive alt text for hero visual]"
+            style="width:100%; max-width:900px; border-radius: var(--r-card);
+                   box-shadow: var(--sh-overlay); display:block; margin:auto;"
+          />
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         TRUST STRIP (Section 3.2)
+         Logos / metrics. Grayscale + low opacity until hover.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="trust-strip section" aria-label="Trusted by">
+      <div class="container">
+        <p class="trust-strip__label">
+          <!-- [e.g. "Trusted by teams at" or "As featured in"] -->
+          [TRUST STRIP LABEL]
+        </p>
+        <div class="trust-strip__logos">
+          <!-- REPLACE: real client logos with permission -->
+          <!-- <img src="logo-client.svg" alt="Client Name" class="trust-strip__logo" /> -->
+          <!-- [PLACEHOLDER — insert real client logos with written permission] -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         PROBLEM (Section 3.3)
+         One unified panel. Hairline dividers between points.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="problem section" id="problem" aria-label="The problem">
+      <div class="container">
+        <div class="problem__headline">
+          <p class="label" style="margin-bottom:12px">The challenge</p>
+          <h2 class="h2">[PROBLEM HEADLINE]</h2>
+        </div>
+
+        <!-- Unified panel: one surface with hairline dividers -->
+        <div class="problem__panel surface panel">
+          <!-- Pain point 1 -->
+          <div class="panel__item">
+            <p class="body">[Pain point 1 from problem section]</p>
+          </div>
+          <!-- Pain point 2 -->
+          <div class="panel__item">
+            <p class="body">[Pain point 2 from problem section]</p>
+          </div>
+          <!-- Pain point 3 -->
+          <div class="panel__item">
+            <p class="body">[Pain point 3 from problem section]</p>
+          </div>
+          <!-- Emotional anchor -->
+          <div class="panel__item">
+            <p class="body" style="font-style:italic; color:var(--text)">
+              "[EMOTIONAL ANCHOR STATEMENT]"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SOLUTION (Section 3.4)
+         Gradient CTA block — glass variant for the inner button.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="solution section" id="solution" aria-label="The solution">
+      <div class="container container--read" style="text-align:center;">
+        <p class="label" style="color:rgba(255,255,255,0.6); margin-bottom:12px">
+          Introducing
+        </p>
+        <h2 class="solution__headline">[SOLUTION HEADLINE]</h2>
+        <p class="solution__body">[SOLUTION POSITIONING PARAGRAPH]</p>
+        <p style="font-size:15px; opacity:0.7; margin-bottom:32px; color:#fff;">
+          [CORE MECHANISM STATEMENT]
+        </p>
+        <a href="#cta" class="btn btn--primary" id="solution-cta">
+          [PRIMARY CTA]
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         BENEFITS (Section 3.5)
+         Grid of cards. White surface. 2-layer shadow. Hover lift.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="benefits section" id="benefits" aria-label="Benefits">
+      <div class="container">
+        <div class="benefits__header">
+          <p class="label" style="margin-bottom:12px">What you get</p>
+          <h2 class="h2">[BENEFITS SECTION HEADLINE]</h2>
+          <p class="body" style="margin-top:12px">[BENEFITS SECTION SUBHEADING]</p>
+        </div>
+
+        <!-- 3-column grid: adjust to 2-column for 6 benefits or fewer -->
+        <div class="grid-3">
+
+          <!-- Benefit card 1 -->
+          <article class="benefit-card card">
+            <div class="benefit-card__icon">
+              <!-- [Icon: emoji or SVG — keep it simple and on-topic] -->
+            </div>
+            <h3 class="benefit-card__title">[BENEFIT 1 HEADLINE]</h3>
+            <p class="benefit-card__body">[BENEFIT 1 EXPLANATION]</p>
+          </article>
+
+          <!-- Repeat for benefits 2–10. Remove the article block for unused slots. -->
+          <!-- [PLACEHOLDER: Add benefit cards 2–10 here] -->
+
+        </div>
+
+        <!-- Inline CTA after benefits -->
+        <div style="text-align:center; margin-top:clamp(32px,4vw,48px);">
+          <a href="#cta" class="btn btn--primary" id="benefits-cta">
+            [PRIMARY CTA]
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         DIFFERENTIATION (Section 3.6)
+         Comparison table inside a unified panel.
+         Mark [ASSUMPTION] columns clearly if not client-verified.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="diff section" id="differentiation" aria-label="Why us">
+      <div class="container">
+        <div class="diff__header">
+          <p class="label" style="margin-bottom:12px">Why [BUSINESS NAME]</p>
+          <h2 class="h2">[DIFFERENTIATION HEADLINE]</h2>
+        </div>
+
+        <div class="surface panel" style="overflow:auto;">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th style="color:var(--accent)">[PRODUCT NAME]</th>
+                <th>[TYPICAL ALTERNATIVE]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- REPLACE with real comparison rows -->
+              <!-- Mark unverified rows: [ASSUMPTION — verify before publishing] -->
+              <tr>
+                <td>[Feature 1]</td>
+                <td class="check us">✓ [Value]</td>
+                <td class="cross">✗</td>
+              </tr>
+              <!-- [PLACEHOLDER: Add comparison rows] -->
+            </tbody>
+          </table>
+        </div>
+
+        <p style="text-align:center; margin-top:28px; max-width:600px; margin-inline:auto;"
+           class="body">
+          [POSITIONING STATEMENT — 1–2 confident, specific sentences]
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         HOW IT WORKS (Section 3.7)
+         Numbered steps in a unified panel. Reduces process anxiety.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="how section" id="how" aria-label="How it works">
+      <div class="container">
+        <div class="how__header">
+          <p class="label" style="margin-bottom:12px">The process</p>
+          <h2 class="h2">[HOW IT WORKS HEADLINE]</h2>
+        </div>
+
+        <div class="surface panel" style="max-width:720px; margin-inline:auto;">
+
+          <!-- Step 1 -->
+          <div class="step panel__item">
+            <div class="step__number">1</div>
+            <div class="step__content">
+              <h3 class="step__title">[STEP 1 NAME]</h3>
+              <p class="step__body">[STEP 1 DESCRIPTION]</p>
+              <p class="step__reassure">[STEP 1 REASSURANCE LINE]</p>
+            </div>
+          </div>
+
+          <!-- Repeat for steps 2–5. Remove unused step blocks. -->
+          <!-- [PLACEHOLDER: Add steps 2–5] -->
+
+        </div>
+
+        <!-- Transition into next section -->
+        <p style="text-align:center; margin-top:32px;" class="body">
+          [TRANSITION STATEMENT]
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SOCIAL PROOF (Section 3.10)
+         Real testimonials only. No fabricated quotes.
+         See templates/testimonial_guide.md to collect real ones.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="proof section" id="proof" aria-label="What clients say">
+      <div class="container">
+        <div class="proof__header">
+          <p class="label" style="margin-bottom:12px">In their words</p>
+          <h2 class="h2">[SOCIAL PROOF HEADLINE]</h2>
+        </div>
+
+        <div class="grid-3">
+
+          <!-- Testimonial 1 — [PLACEHOLDER if no real testimonial] -->
+          <article class="testimonial card">
+            <p class="testimonial__quote">
+              [PLACEHOLDER — Real testimonial from a customer who
+              struggled with X and achieved Y. Answers objection:
+              "Is this worth the money?" — See templates/testimonial_guide.md]
+            </p>
+            <div class="testimonial__author">
+              <img
+                src="[AVATAR URL]"
+                alt="[Customer Name]"
+                class="testimonial__avatar"
+              />
+              <div>
+                <p class="testimonial__name">[Full Name]</p>
+                <p class="testimonial__meta">[Title, Company]</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- [PLACEHOLDER: Add testimonials 2–3] -->
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         ABOUT (Section 3.11)
+         Human trust. Real credentials only. No fabricated achievements.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="about section" id="about" aria-label="About us">
+      <div class="container">
+        <div class="about__inner">
+
+          <div>
+            <p class="label about__label">Our story</p>
+            <h2 class="h2 about__headline">[ABOUT HEADLINE]</h2>
+            <p class="body about__body">[COMPANY STORY — why we exist]</p>
+            <p class="body">[FOUNDER INTRO — [PLACEHOLDER if not confirmed]]</p>
+          </div>
+
+          <!-- Replace with real team/founder photo -->
+          <img
+            src="[TEAM PHOTO URL]"
+            alt="[PLACEHOLDER — team or founder photo]"
+            class="about__image"
+          />
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         FAQ (Section 3.12)
+         Accordion. Addresses remaining objections before final CTA.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="faq section" id="faq" aria-label="FAQ">
+      <div class="container">
+        <div class="faq__header">
+          <p class="label" style="margin-bottom:12px">Common questions</p>
+          <h2 class="h2">[FAQ HEADLINE]</h2>
+        </div>
+
+        <div class="faq__panel surface panel">
+
+          <!-- FAQ item — repeat for 8–12 questions from Section 3.12 -->
+          <details class="faq__item">
+            <summary class="faq__q">[FAQ QUESTION 1]</summary>
+            <p class="faq__a">[FAQ ANSWER 1]</p>
+          </details>
+
+          <!-- [PLACEHOLDER: Add FAQ items 2–12] -->
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         FINAL CTA (Section 3.13)
+         Gradient block. Glass button variant. Summary of transformation.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="final-cta" id="cta" aria-label="Get started">
+      <div class="container">
+        <h2 class="final-cta__headline">[FINAL CTA HEADLINE]</h2>
+        <p class="final-cta__sub">[FINAL SUPPORTING STATEMENT]</p>
+        <a href="[CTA DESTINATION URL]" class="btn btn--primary" id="final-primary-cta">
+          [FINAL CTA TEXT]
+        </a>
+        <p class="final-cta__microcopy">[CTA MICROCOPY — e.g. "No commitment. Cancel any time."]</p>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <footer class="footer container" role="contentinfo">
+    <p class="footer__copy">
+      © <span id="year"></span> [BUSINESS NAME]. All rights reserved.
+    </p>
+    <nav class="footer__links" aria-label="Footer navigation">
+      <a href="/privacy">[Privacy Policy]</a>
+      <a href="/terms">[Terms of Service]</a>
+      <a href="/contact">[Contact]</a>
+    </nav>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MOBILE STICKY CTA
+       Appears after first scroll on mobile only.
+       Glass layer — backdrop-filter applies.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div class="sticky-cta" id="sticky-cta" role="complementary" aria-label="Quick action">
+    <a href="#cta" class="btn btn--primary" id="sticky-primary-cta">
+      [SHORT MOBILE CTA — under 5 words]
+    </a>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCRIPTS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <script>
+    // ── Auto year in footer ───────────────────────────────────────────────
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Dark mode toggle ──────────────────────────────────────────────────
+    // Reads system preference on load. Add a toggle button and call:
+    //   document.documentElement.classList.toggle('dark')
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+
+    // ── Mobile sticky CTA: show after first viewport scroll ───────────────
+    const stickyCta = document.getElementById('sticky-cta');
+    let stickyVisible = false;
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY > window.innerHeight * 0.8;
+      if (scrolled && !stickyVisible) {
+        stickyCta.style.display = 'flex';
+        stickyVisible = true;
+      }
+    }, { passive: true });
+
+    // ── FAQ accordion: close others on open ──────────────────────────────
+    document.querySelectorAll('details.faq__item').forEach(detail => {
+      detail.addEventListener('toggle', () => {
+        if (detail.open) {
+          document.querySelectorAll('details.faq__item').forEach(other => {
+            if (other !== detail) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+
+  </script>
+
+  <!--
+    ── FAQ Schema (copy and fill for Google rich results) ────────────────────
+    Uncomment and fill before publishing.
+    See references/seo_guidelines.md § FAQ Schema.
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "[FAQ QUESTION 1]",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "[FAQ ANSWER 1]"
+        }
+      }
+    ]
+  }
+  </script>
+  -->
+
+</body>
+</html>
