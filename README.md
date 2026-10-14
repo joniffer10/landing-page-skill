@@ -40,12 +40,15 @@ landing-page-generator/
 ├── references/
 │   ├── conversion_psychology.md    AIDA, loss aversion, social proof, friction
 │   ├── copywriting_formulas.md     FAB, PAS, BAB, PASTOR, 4Ps and usage guide
+│   ├── production_minimal_ui.md    Flat, responsive minimal UI system (zero glass, solid matte)
 │   └── seo_guidelines.md           Title, meta, slug, keywords, search intent
 │
 ├── templates/
 │   ├── strategy_brief.md           Strategic Foundation output template
 │   ├── hero_section.md             Hero section fill-in template
 │   ├── full_page_output.md         Complete 13-section page skeleton
+│   ├── html_starter.html           Production minimal HTML starter
+│   ├── tokens.css                  Design tokens and utility classes
 │   ├── testimonial_guide.md        Real testimonial collection guide
 │   └── placeholder_log.md          Tracking table for all placeholders
 │

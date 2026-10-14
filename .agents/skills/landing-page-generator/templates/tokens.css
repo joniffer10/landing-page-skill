@@ -1,6 +1,6 @@
 /* =============================================================================
-   iDesign — Liquid Glass Design System
-   CSS Custom Properties (Design Tokens)
+   Production Minimal UI System (Flat, Responsive & Universal UX)
+   CSS Custom Properties (Design Tokens) & Utilities
    
    Landing Page Generator — templates/tokens.css
    
@@ -8,13 +8,9 @@
    Link this file first in every HTML output:
      <link rel="stylesheet" href="tokens.css">
    
-   Then reference tokens throughout your stylesheet:
-     background: var(--bg);
-     border-radius: var(--r-panel);
-     box-shadow: var(--sh-card);
-   
    Never override token values inline. Never use ad-hoc values for
    anything a token covers.
+   ZERO GLASS: No backdrop-filter, no frosted translucency. 100% solid surfaces.
    ============================================================================= */
 
 /* --------------------------------------------------------------------------- */
@@ -22,141 +18,169 @@
 /* --------------------------------------------------------------------------- */
 
 :root {
+  /* ── Surfaces & Canvas (Light - 100% Solid Matte) ───────────────────────── */
+  --bg-app:            #F7F7F8;
+  --bg-surface:        #FFFFFF;
+  --bg-surface-subtle: #F0F0F2;
+  --bg-surface-hover:  #E6E6EB;
+  --bg-surface-active: #DCDCE2;
 
-  /* ── Canvas & Neutrals ──────────────────────────────────────────────────── */
-  --bg:        #f5f5f7;          /* Cool grey-white ground. NEVER warm/yellow. */
-  --surface:   #ffffff;          /* Panel and card surface                     */
-  --hover:     #fbfbfd;          /* Row / item hover tint                      */
-  --text:      #1d1d1f;          /* Primary titles and labels                  */
-  --text-body: #424245;          /* Long body paragraphs                       */
-  --text-2:    #6e6e73;          /* Secondary captions and meta                */
-  --text-3:    #86868b;          /* Tertiary labels                            */
-  --text-4:    #aeaeb2;          /* Muted placeholders                         */
-  --faint:     #d2d2d7;          /* Light dividers and arrows                  */
-  --hairline:  rgba(0, 0, 0, 0.07); /* Standard hairline divider              */
-  --track:     #e8e8ed;          /* Slider and progress tracks                 */
+  /* Aliases for semantic interoperability */
+  --bg:                var(--bg-app);
+  --surface:           var(--bg-surface);
+  --hover:             var(--bg-surface-hover);
 
-  /* ── Accents & Statuses ─────────────────────────────────────────────────── */
-  --accent:       #0071e3;       /* System Blue — primary buttons, active      */
-  --accent-hover: #0062c4;       /* System Blue hover state                    */
-  --accent-link:  #0066cc;       /* Inline link color                          */
-  --indigo:       #5e5ce6;       /* Secondary gradient stop                    */
-  --heat:         #ff6b00;       /* Heat / emphasis / hot items                */
-  --live:         #30d158;       /* Live status / success                      */
-  --success:      #30d158;
-  --warning:      #ff9f0a;
-  --danger:       #ff3b30;
-  --info:         #0a84ff;
+  /* ── Borders & Hairlines (Light - 1px Crisp Matte) ──────────────────────── */
+  --border-subtle:     #ECECED;
+  --border-default:    #E2E2E6;
+  --border-strong:     #C7C7CE;
+  --hairline:          var(--border-default);
 
-  /* ── Signature Gradients (Hero and CTA sections ONLY) ───────────────────── */
-  --grad-blue: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%);
-  --grad-warm: linear-gradient(135deg, #ff9f0a 0%, #ff375f 100%);
-  --grad-cta:  linear-gradient(135deg, #0071e3 0%, #5e5ce6 100%);
+  /* ── Typography (WCAG 2.1 AAA/AA Compliant) ────────────────────────────── */
+  --text-primary:      #111111;       /* 16.5:1 contrast against pure white */
+  --text-secondary:    #585860;     /* 5.6:1 contrast (WCAG AA compliant) */
+  --text-tertiary:     #787882;      /* Helper icons & timestamps */
+  --text-inverse:      #FFFFFF;
 
-  /* ── Radius Semantic Tiers ──────────────────────────────────────────────── */
-  --r-pill:   999px;             /* Buttons, tags, segmented controls          */
-  --r-hero:   26px;              /* Hero CTA banners                           */
-  --r-panel:  22px;              /* Main unified panels                        */
-  --r-card:   18px;              /* Standard cards                             */
-  --r-sheet:  16px;              /* Modals and bottom sheets                   */
-  --r-thumb:  12px;              /* Avatars and thumbnails                     */
-  --r-chip:   6px;               /* Small badges and chips                     */
+  /* Typography aliases */
+  --text:              var(--text-primary);
+  --text-body:         var(--text-secondary);
+  --text-2:            var(--text-secondary);
+  --text-3:            var(--text-tertiary);
 
-  /* ── 2-Layer Elevation Shadows ──────────────────────────────────────────── */
-  /* NEVER use a single hard drop-shadow. Always use these 2-layer pairs.      */
-  --sh-card:
-    0 1px 2px  rgba(0, 0, 0, 0.04),
-    0 8px 24px rgba(0, 0, 0, 0.05);
+  /* ── Brand & Actions ────────────────────────────────────────────────────── */
+  --brand-primary:        #E60023;   /* Signature Focal Red */
+  --brand-primary-hover:  #CC001F;
+  --brand-primary-active: #A80019;
+  --brand-primary-fg:     #FFFFFF;
 
-  --sh-panel:
-    0 1px 3px  rgba(0, 0, 0, 0.05),
-    0 14px 40px rgba(0, 0, 0, 0.05);
+  --brand-neutral:        #18181A;   /* Dark solid action pill */
+  --brand-neutral-hover:  #2E2E33;
+  --brand-neutral-fg:     #FFFFFF;
 
-  --sh-lift:
-    0 12px 32px rgba(0, 0, 0, 0.10);
+  --accent:               var(--brand-primary);
+  --accent-hover:         var(--brand-primary-hover);
 
-  --sh-cta:
-    0 20px 54px rgba(0, 113, 227, 0.24);
+  /* ── Universal Accessibility & Focus ────────────────────────────────────── */
+  --focus-ring:        #0066CC;
+  --focus-ring-offset: #FFFFFF;
 
-  --sh-overlay:
-    0 2px 8px  rgba(0, 0, 0, 0.10),
-    0 30px 80px rgba(0, 0, 0, 0.24);
+  /* ── Flat Controlled Elevation (Light Mode) ─────────────────────────────── */
+  --shadow-surface:    0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-popover:    0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --sh-card:           var(--shadow-surface);
+  --sh-panel:          var(--shadow-surface);
+  --sh-lift:           0 6px 16px rgba(0, 0, 0, 0.08);
 
-  /* ── Glass Surface ──────────────────────────────────────────────────────── */
-  /* Apply ONLY to: sticky nav, modals/popovers, colored CTA blocks.          */
-  /* NEVER apply to plain content sections.                                    */
-  --glass-bg:     rgba(255, 255, 255, 0.72);
-  --glass-filter: saturate(180%) blur(20px);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.40);
+  /* ── Precision Radius Scale ─────────────────────────────────────────────── */
+  --r-sm:   8px;                     /* Tooltips, tags, compact chips */
+  --r-md:   14px;                    /* Dropdown popovers, select menus, input fields */
+  --r-lg:   20px;                    /* Sidebar squircle hitboxes, preview thumbnails */
+  --r-xl:   32px;                    /* Media cards, large containers */
+  --r-full: 9999px;                  /* Action pills, search inputs */
 
-  /* ── Typography ─────────────────────────────────────────────────────────── */
-  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, 'Fira Code', monospace;
+  /* Radius aliases */
+  --r-pill:  var(--r-full);
+  --r-card:  var(--r-xl);
+  --r-panel: var(--r-xl);
+  --r-sheet: var(--r-md);
+  --r-thumb: var(--r-lg);
+  --r-chip:  var(--r-sm);
 
-  --tracking-tightest: -0.035em;  /* Hero H1                                  */
-  --tracking-tight:    -0.02em;   /* Section H2, card H3                      */
-  --tracking-normal:    0em;
-  --tracking-wide:      0.01em;   /* Captions, labels                         */
+  /* ── Typography Scale & Tracking ────────────────────────────────────────── */
+  --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* ── Motion ─────────────────────────────────────────────────────────────── */
-  --ease-spring:    cubic-bezier(0.32, 0.72, 0,   1);   /* Modals, drawers   */
-  --ease-out-quart: cubic-bezier(0.25,  1,   0.5, 1);   /* Hover, buttons    */
-  --duration-fast:  0.16s;
-  --duration-base:  0.22s;
-  --duration-slow:  0.38s;
+  --tracking-h1:   -0.025em;
+  --tracking-h2:   -0.015em;
+  --tracking-body: -0.005em;
+  --tracking-sub:   0em;
+  --tracking-micro: 0.01em;
 
-  /* ── Layout ──────────────────────────────────────────────────────────────── */
-  --max-read: 720px;             /* Reading column width                       */
-  --max-grid: 1120px;            /* Full grid width                            */
-  --pad-x:    22px;              /* Horizontal container padding               */
-  --section-py: clamp(34px, 6vw, 56px); /* Section vertical rhythm            */
-  --gap:      clamp(16px, 2.5vw, 24px); /* Responsive gap                     */
+  /* ── Motion & Transitions ───────────────────────────────────────────────── */
+  --ease-tactile: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+
+  /* ── Layout & Responsive Constants ──────────────────────────────────────── */
+  --max-read: 720px;
+  --max-grid: 1140px;
+  --pad-x: 24px;
+  --section-py: clamp(48px, 8vw, 88px);
+  --gap: 20px;
 }
 
 
 /* --------------------------------------------------------------------------- */
-/* DARK MODE                                                                    */
-/* Activated by adding class="dark" to <html> or :root                         */
+/* DARK MODE TOKENS (100% Solid Matte, Zero Liquid Edge, Zero Glowing Borders)   */
 /* --------------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Pure Solid Matte Backgrounds */
+    --bg-app:            #0F0F11;
+    --bg-surface:        #18181B;
+    --bg-surface-subtle: #242428;
+    --bg-surface-hover:  #2E2E34;
+    --bg-surface-active: #383840;
+
+    /* Matte Muted Borders (Never glow or glassy white lines) */
+    --border-subtle:     #222226;
+    --border-default:    #2C2C32;
+    --border-strong:     #3D3D46;
+
+    /* Typography */
+    --text-primary:      #F4F4F6;
+    --text-secondary:    #A0A0A8;
+    --text-tertiary:     #6E6E78;
+    --text-inverse:      #111111;
+
+    --brand-neutral:        #F4F4F6;
+    --brand-neutral-hover:  #E0E0E6;
+    --brand-neutral-fg:     #111111;
+
+    --focus-ring:        #3B82F6;
+    --focus-ring-offset: #0F0F11;
+
+    /* Elevation in Dark Mode (Pure Border Containment, Zero Dirty Halos) */
+    --shadow-surface: 0 0 0 1px var(--border-default);
+    --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-default);
+    --sh-lift: 0 0 0 1px var(--border-strong);
+  }
+}
 
 :root.dark,
 [data-theme="dark"] {
-  --bg:        #000000;          /* True black (OLED-optimised)                */
-  --surface:   #1c1c1e;          /* Dark surface — not navy, not charcoal      */
-  --hover:     #2c2c2e;          /* Dark row hover                             */
-  --text:      #f5f5f7;
-  --text-body: #d1d1d6;
-  --text-2:    #98989d;
-  --text-3:    #6e6e73;
-  --text-4:    #48484a;
-  --faint:     #3a3a3c;
-  --hairline:  rgba(255, 255, 255, 0.12);
-  --track:     #3a3a3c;
+  --bg-app:            #0F0F11;
+  --bg-surface:        #18181B;
+  --bg-surface-subtle: #242428;
+  --bg-surface-hover:  #2E2E34;
+  --bg-surface-active: #383840;
 
-  --accent:    #0a84ff;          /* Brighter blue for dark contrast            */
-  --accent-hover: #409cff;
-  --accent-link:  #409cff;
+  --border-subtle:     #222226;
+  --border-default:    #2C2C32;
+  --border-strong:     #3D3D46;
 
-  --sh-card:
-    0 1px 2px  rgba(0, 0, 0, 0.30),
-    0 8px 24px rgba(0, 0, 0, 0.40);
+  --text-primary:      #F4F4F6;
+  --text-secondary:    #A0A0A8;
+  --text-tertiary:     #6E6E78;
+  --text-inverse:      #111111;
 
-  --sh-panel:
-    0 1px 3px  rgba(0, 0, 0, 0.30),
-    0 14px 40px rgba(0, 0, 0, 0.35);
+  --brand-neutral:        #F4F4F6;
+  --brand-neutral-hover:  #E0E0E6;
+  --brand-neutral-fg:     #111111;
 
-  --sh-overlay:
-    0 2px 8px  rgba(0, 0, 0, 0.40),
-    0 30px 80px rgba(0, 0, 0, 0.60);
+  --focus-ring:        #3B82F6;
+  --focus-ring-offset: #0F0F11;
 
-  --glass-bg:     rgba(28, 28, 30, 0.80);
-  --glass-filter: saturate(180%) blur(20px);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.10);
+  --shadow-surface: 0 0 0 1px var(--border-default);
+  --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-default);
+  --sh-lift: 0 0 0 1px var(--border-strong);
 }
 
 
 /* --------------------------------------------------------------------------- */
-/* RESET & BASE                                                                 */
+/* RESET & ACCESSIBILITY BASE                                                  */
 /* --------------------------------------------------------------------------- */
 
 *, *::before, *::after {
@@ -173,19 +197,33 @@ html {
 
 body {
   font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Accessible focus outlines */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Reduced motion query */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 
 /* --------------------------------------------------------------------------- */
-/* UTILITY CLASSES                                                              */
+/* CORE LAYOUT UTILITIES                                                       */
 /* --------------------------------------------------------------------------- */
 
-/* Container */
 .container {
   width: 100%;
   max-width: var(--max-grid);
@@ -197,52 +235,55 @@ body {
   max-width: var(--max-read);
 }
 
-/* Surface */
+.section {
+  padding-block: var(--section-py);
+}
+
+/* --------------------------------------------------------------------------- */
+/* SOLID MATTE SURFACES & CONTAINERS (Zero Glass)                               */
+/* --------------------------------------------------------------------------- */
+
 .surface {
-  background: var(--surface);
-  border-radius: var(--r-panel);
-  box-shadow: var(--sh-panel);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-surface);
 }
 
 .card {
-  background: var(--surface);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-default);
   border-radius: var(--r-card);
-  box-shadow: var(--sh-card);
-  transition: box-shadow var(--duration-base) var(--ease-out-quart),
-              transform  var(--duration-base) var(--ease-out-quart);
+  box-shadow: var(--shadow-surface);
+  transition: transform var(--duration-fast) var(--ease-tactile),
+              box-shadow var(--duration-fast) var(--ease-tactile),
+              border-color var(--duration-fast) var(--ease-tactile);
 }
 
 .card:hover {
+  border-color: var(--border-strong);
   box-shadow: var(--sh-lift);
-  transform: translateY(-2px);
 }
 
-/* Glass (floating layers ONLY) */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-filter);
-  -webkit-backdrop-filter: var(--glass-filter);
-  border: var(--glass-border);
-}
-
-/* Hairline divider */
 .divider {
   border: none;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--border-subtle);
 }
 
 /* Unified list panel */
 .panel {
-  background: var(--surface);
-  border-radius: var(--r-panel);
-  box-shadow: var(--sh-panel);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-surface);
   overflow: hidden;
 }
 
 .panel__item {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--hairline);
-  transition: background var(--duration-fast) var(--ease-out-quart);
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  transition: background-color var(--duration-fast) ease;
 }
 
 .panel__item:last-child {
@@ -250,172 +291,230 @@ body {
 }
 
 .panel__item:hover {
-  background: var(--hover);
+  background-color: var(--bg-surface-hover);
 }
 
-/* Typography */
+
+/* --------------------------------------------------------------------------- */
+/* TYPOGRAPHY                                                                   */
+/* --------------------------------------------------------------------------- */
+
 .h1 {
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(2rem, 1.4rem + 1.8vw, 3.25rem);
   font-weight: 700;
-  letter-spacing: var(--tracking-tightest);
-  line-height: 1.05;
-  color: var(--text);
+  letter-spacing: var(--tracking-h1);
+  line-height: 1.1;
+  color: var(--text-primary);
 }
 
 .h2 {
-  font-size: clamp(28px, 4vw, 48px);
-  font-weight: 700;
-  letter-spacing: var(--tracking-tight);
-  line-height: 1.1;
-  color: var(--text);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-h2);
+  line-height: 1.3;
+  color: var(--text-primary);
 }
 
 .h3 {
-  font-size: clamp(20px, 2.5vw, 24px);
+  font-size: 18px;
   font-weight: 600;
-  letter-spacing: var(--tracking-tight);
-  line-height: 1.2;
-  color: var(--text);
+  letter-spacing: var(--tracking-h2);
+  line-height: 1.35;
+  color: var(--text-primary);
 }
 
 .body {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.85;
-  color: var(--text-body);
+  letter-spacing: var(--tracking-body);
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
-.caption {
-  font-size: 13px;
-  letter-spacing: var(--tracking-wide);
-  color: var(--text-2);
-}
-
+.subtext,
 .label {
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: var(--tracking-wide);
-  color: var(--text-3);
-  text-transform: uppercase;
+  letter-spacing: var(--tracking-sub);
+  line-height: 1.4;
+  color: var(--text-secondary);
 }
 
-/* Numeric data */
+.micro {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-micro);
+  line-height: 1.3;
+  color: var(--text-tertiary);
+}
+
 .num {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
 
-/* Buttons */
+
+/* --------------------------------------------------------------------------- */
+/* ACTION PILL BUTTONS (Tactile & Accessible)                                   */
+/* --------------------------------------------------------------------------- */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 24px;
+  height: 44px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 24px;
+  border-radius: var(--r-full);
   font-family: var(--font);
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: -0.01em;
   line-height: 1;
-  border-radius: var(--r-pill);
-  border: none;
-  cursor: pointer;
-  min-height: 44px;            /* Touch target minimum */
   text-decoration: none;
-  transition: all var(--duration-base) var(--ease-out-quart);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform var(--duration-fast) var(--ease-tactile),
+              background-color var(--duration-fast) ease,
+              border-color var(--duration-fast) ease;
   white-space: nowrap;
 }
 
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Primary Action Pill (Signature Focal Red) */
 .btn--primary {
-  background: var(--grad-cta);
-  color: #ffffff;
-  box-shadow: var(--sh-cta);
+  background-color: var(--brand-primary);
+  color: var(--brand-primary-fg);
+  border-color: transparent;
 }
 
 .btn--primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 24px 60px rgba(0, 113, 227, 0.30);
+  background-color: var(--brand-primary-hover);
 }
 
 .btn--primary:active {
-  transform: translateY(0);
+  background-color: var(--brand-primary-active);
+  transform: scale(0.95);
 }
 
+/* Neutral Action Pill */
+.btn--neutral {
+  background-color: var(--brand-neutral);
+  color: var(--brand-neutral-fg);
+  border-color: transparent;
+}
+
+.btn--neutral:hover {
+  background-color: var(--brand-neutral-hover);
+}
+
+/* Secondary Action Pill */
 .btn--secondary {
-  background: var(--surface);
-  color: var(--accent);
-  box-shadow: var(--sh-card);
-  border: 1px solid var(--hairline);
+  background-color: var(--bg-surface-subtle);
+  color: var(--text-primary);
+  border-color: var(--border-default);
 }
 
 .btn--secondary:hover {
-  background: var(--hover);
-  box-shadow: var(--sh-lift);
-  transform: translateY(-1px);
+  background-color: var(--bg-surface-hover);
+  border-color: var(--border-strong);
 }
 
+/* Ghost Action */
 .btn--ghost {
-  background: transparent;
-  color: var(--accent);
-  border: none;
-  box-shadow: none;
-  padding-inline: 8px;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+  padding-inline: 12px;
 }
 
 .btn--ghost:hover {
-  color: var(--accent-hover);
+  background-color: var(--bg-surface-subtle);
+  color: var(--text-primary);
 }
 
-/* Tag / Chip */
+
+/* --------------------------------------------------------------------------- */
+/* TAGS & CHIPS                                                                */
+/* --------------------------------------------------------------------------- */
+
 .chip {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   padding: 4px 10px;
   font-size: 12px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-micro);
+  border-radius: var(--r-sm);
+  background-color: var(--bg-surface-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.chip--primary {
+  background-color: var(--bg-surface-subtle);
+  color: var(--brand-primary);
+  border-color: var(--border-default);
+}
+
+
+/* --------------------------------------------------------------------------- */
+/* CONTEXTUAL FLOATING POPOVER (100% Solid Matte, Zero Glass)                   */
+/* --------------------------------------------------------------------------- */
+
+.popover-menu {
+  min-width: 190px;
+  padding: 6px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-popover);
+}
+
+.popover-menu__item {
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  font-size: 14px;
   font-weight: 500;
-  border-radius: var(--r-chip);
-  background: rgba(0, 113, 227, 0.10);
-  color: var(--accent);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) ease;
 }
 
-.chip--live {
-  background: rgba(48, 209, 88, 0.12);
-  color: var(--live);
+.popover-menu__item:hover,
+.popover-menu__item:focus-visible {
+  background-color: var(--bg-surface-hover);
 }
 
-.chip--heat {
-  background: rgba(255, 107, 0, 0.12);
-  color: var(--heat);
-}
 
-/* Section rhythm */
-.section {
-  padding-block: var(--section-py);
-}
+/* --------------------------------------------------------------------------- */
+/* RESPONSIVE MASONRY & GRID UTILITIES                                         */
+/* --------------------------------------------------------------------------- */
 
-/* Gradient hero */
-.hero-grad {
-  background: var(--grad-blue);
-  color: #ffffff;
-}
-
-/* Accent text */
-.text-accent { color: var(--accent); }
-.text-heat   { color: var(--heat); }
-.text-live   { color: var(--live); }
-.text-2      { color: var(--text-2); }
-.text-3      { color: var(--text-3); }
-
-/* Grid helpers */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
 
-@media (max-width: 768px) {
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+@media (max-width: 1023px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 }
 
-@media (max-width: 1024px) {
-  .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 639px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; gap: 12px; }
+  
+  .btn {
+    min-height: 48px;
+    height: 48px;
+  }
 }

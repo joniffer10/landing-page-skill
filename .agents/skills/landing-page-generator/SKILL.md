@@ -9,7 +9,7 @@ read_next:
   - rules/behavioral.md
   - rules/copywriting.md
   - rules/ux_design.md
-  - references/liquid_glass_design_system.md
+  - references/production_minimal_ui.md
   - references/conversion_psychology.md
   - references/copywriting_formulas.md
   - references/seo_guidelines.md

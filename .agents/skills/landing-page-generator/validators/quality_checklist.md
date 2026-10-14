@@ -83,22 +83,22 @@ A FAIL on any CRITICAL item means the output must be revised before delivery.
 
 ---
 
-## Category 5: UX, Structure & Liquid Glass Design System
+## Category 5: UX, Structure & Production Minimal UI System
 
 | # | Check | Priority | Result | Notes |
 |---|---|---|---|---|
 | U1 | There is exactly one H1 on the page | CRITICAL | | |
-| U2 | Ground is cool `#f5f5f7` (never warm/cream/kraft paper) | CRITICAL | | |
-| U3 | Content sits on solid `#ffffff` surfaces + 2-layer shadows | CRITICAL | | |
-| U4 | Glass (`backdrop-filter: saturate(180%) blur(20px)`) used ONLY on overlapping layers | CRITICAL | | |
-| U5 | Sibling items use unified white panel + hairline (`rgba(0,0,0,0.07)`), not fragmented cards | HIGH | | |
-| U6 | Large headlines have negative letter-spacing (`-0.02em` to `-0.035em`) | HIGH | | |
-| U7 | Numeric data uses `font-variant-numeric: tabular-nums` | HIGH | | |
-| U8 | Color is reserved for Accent (`#0071e3`), Heat (`#ff6b00`), Live (`#30d158`) — body is grayscale | HIGH | | |
-| U9 | Radius and elevation shadows taken from named token tiers | HIGH | | |
-| U10 | Section order follows a logical conversion flow | HIGH | | |
-| U11 | Mobile layout recommendations & sticky CTA are included | HIGH | | |
-| U12 | Form fields are minimised and styled cleanly | MEDIUM | | |
+| U2 | Zero instances of `backdrop-filter` or `backdrop-blur` (Liquid Glass Ban) | CRITICAL | | |
+| U3 | 100% solid matte surfaces (all containers, cards, modals, nav are fully opaque) | CRITICAL | | |
+| U4 | Dark mode borders use matte neutral tones (`#2C2C32`, `#222226`), zero glowing/translucent glass lines | CRITICAL | | |
+| U5 | Contrast satisfies WCAG 2.1 AAA for headlines and AA for body text | CRITICAL | | |
+| U6 | Touch targets are $\ge$ 44x44px (desktop) and $\ge$ 48x48px (mobile) | HIGH | | |
+| U7 | Navigation metamorphoses cleanly into mobile bottom dock (`h-16`) on `< 768px` | HIGH | | |
+| U8 | Visible focus ring enforced (`:focus-visible` with `outline: 2px solid var(--focus-ring)`) | HIGH | | |
+| U9 | Radius tiers (8px, 14px, 20px, 32px, 9999px) and solid flat elevation followed | HIGH | | |
+| U10 | Kinetic micro-interactions use `@media (prefers-reduced-motion: reduce)` fallback | HIGH | | |
+| U11 | Section order follows a logical conversion flow | HIGH | | |
+| U12 | Form fields are minimised and styled cleanly with floating or top labels | MEDIUM | | |
 
 ---
 

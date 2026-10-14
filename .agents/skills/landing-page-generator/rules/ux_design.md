@@ -4,22 +4,34 @@ Guidelines for page structure, visual hierarchy, layout recommendations, and
 mobile behaviour. These rules apply to the UX / UI Recommendations section of
 every output.
 
-All visual UI, HTML, and CSS implementations MUST adhere to the **Liquid Glass
-Design System** (`references/liquid_glass_design_system.md` & `templates/tokens.css`).
+All visual UI, HTML, and CSS implementations MUST adhere to the **Production Minimal UI System** (`references/production_minimal_ui.md` & `templates/tokens.css`).
 
-> **Core Philosophy:** Cool light grey-white ground (`#f5f5f7`) + unified white
-> surfaces + hairline dividers (`rgba(0,0,0,0.07)`); glass ONLY where layers truly overlap.
-> Restraint is the luxury.
+> **Core Philosophy:** Flat, tactile, distraction-free minimalist UI inspired by Pinterest and Raycast. 100% solid matte surfaces with zero glass or translucency, crisp 1px matte borders, WCAG AAA/AA contrast, fluid responsive metamorphosis, and tactile action pills.
 
 ---
 
-## 5 Liquid Glass Core Philosophy Rules
+## Production Minimal UI Core Principles
 
-1. **Unified surface > fragmented cards:** Sibling items belong on one white panel with hairline dividers (`rgba(0,0,0,0.07)`), not a pile of separately-bordered cards.
-2. **Glass is seasoning, not the dish:** `backdrop-filter: saturate(180%) blur(20px)` frost ONLY on overlapping layers (sticky nav, modals, colored CTA blocks). Plain content is solid `#ffffff` + 2-layer shadow.
-3. **Restraint is luxury:** If whitespace and hierarchy solve it, don't add borders, decorative icons, or colored fills.
-4. **Hierarchy from weight + size + grayscale, not color:** Body world is black-white-grey. Color is strictly reserved for Accent (`#0071e3`), Heat (`#ff6b00`), and Live (`#30d158`).
-5. **Quality lives in details:** Negative letter-spacing (`-0.02em` to `-0.035em`) on titles, `tabular-nums` on figures, 2-layer elevation shadows, hairline dividers.
+1. **Absolute Anti-Patterns (Liquid Glass & Gloss Ban):**
+   - **Never use `backdrop-filter: blur(...)` or `backdrop-blur-*`:** No frosted-glass modals, hazy toolbars, or blurry backdrops.
+   - **Never use translucent glowing borders in Dark Mode:** Zero semi-transparent whites (e.g. `rgba(255, 255, 255, 0.15)`) or neon specular lines. Dark mode borders must be matte neutral tones (`--border-default: #2C2C32`, `--border-subtle: #222226`).
+   - **100% Solid Surfaces:** Every surface, card, popover, modal, and header must be an opaque fill in both light and dark modes.
+
+2. **Structural Separation via Matte Tonal Steps:**
+   - Separate containers using solid matte tonal steps (Canvas `--bg-app` → Surface `--bg-surface` → Subtle `--bg-surface-subtle`) and 1px crisp matte borders (`--border-default`), never drop-shadow halos or specular highlights.
+
+3. **Action Pill Buttons & Tactile Ergonomics:**
+   - Primary action pills use signature focal red (`--brand-primary: #E60023`), neutral dark pill (`--brand-neutral: #18181A` / dark-mode `#F4F4F6`), `rounded-full` (9999px), and subtle tactile compression (`active:scale-95`).
+
+4. **Universal Accessibility & Focus:**
+   - Minimum touch target: **44x44px** on desktop/tablet, **48x48px** on mobile.
+   - WCAG AAA contrast for titles, AA for body.
+   - Visible focus states: `outline: 2px solid var(--focus-ring); outline-offset: 2px;`.
+   - Motion ergonomics: Support `@media (prefers-reduced-motion: reduce)`.
+
+5. **Responsive Architecture & Navigation Metamorphosis:**
+   - Desktop: Vertical navigation rail (`w-[68px]`) or clean solid top bar.
+   - Mobile (`< 768px` / `< 640px`): Collapses into fixed bottom dock (`h-16`) with safe-area insets (`pb-[env(safe-area-inset-bottom)]`), solid opaque surface background (`--bg-surface`), and 1px top border (`--border-subtle`).
 
 ---
 
