@@ -110,12 +110,67 @@ A FAIL on any CRITICAL item means the output must be revised before delivery.
 | O2 | Hero section has 10 headline variations | HIGH | | |
 | O3 | Hero section has 5 subheading variations | HIGH | | |
 | O4 | Hero section has 10 CTA variations | HIGH | | |
-| O5 | Benefits section has 8–10 blocks | HIGH | | |
-| O6 | FAQ section has 8–12 questions | HIGH | | |
-| O7 | Final CTA section has 10 CTA variations and 5 headline variations | HIGH | | |
-| O8 | Placeholder log is complete and up to date | CRITICAL | | |
-| O9 | Recommended final version is clean and designer-ready | HIGH | | |
-| O10 | Conversion optimisation notes include 5–10 specific recommendations | MEDIUM | | |
+| O5 | A/B Split Test package (Variant A: Loss Aversion vs Variant B: Outcome) provided | HIGH | | |
+| O6 | Benefits section has 8–10 blocks | HIGH | | |
+| O7 | FAQ section has 8–12 questions | HIGH | | |
+| O8 | Final CTA section has 10 CTA variations and 5 headline variations | HIGH | | |
+| O9 | Placeholder log is complete and up to date | CRITICAL | | |
+| O10 | Recommended final version is clean and designer/developer-ready | HIGH | | |
+| O11 | Conversion optimisation notes include 5–10 specific recommendations | MEDIUM | | |
+
+---
+
+## Category 7: Security, Privacy & Form Hardening
+
+| # | Check | Priority | Result | Notes |
+|---|---|---|---|---|
+| S1 | Content Security Policy (CSP) defined with `frame-ancestors 'none'` | CRITICAL | | |
+| S2 | All external links (`target="_blank"`) enforce `rel="noopener noreferrer"` | CRITICAL | | |
+| S3 | Zero instances of `innerHTML` or `document.write` used for dynamic parameters | CRITICAL | | |
+| S4 | Dynamic Text Replacement (DTR) sanitizes inputs and uses `textContent` | CRITICAL | | |
+| S5 | Invisible honeypot field integrated into lead capture forms | HIGH | | |
+| S6 | Form submission speed threshold (timestamp token) active | HIGH | | |
+| S7 | Client-side submission debouncing / rate limiting enabled | HIGH | | |
+| S8 | Explicit Privacy Policy and Terms of Service consent links present on forms | HIGH | | |
+| S9 | Subresource Integrity (SRI) hashes applied to external CDN scripts/styles | MEDIUM | | |
+
+---
+
+## Category 8: CRO Telemetry & Analytics Instrumentation
+
+| # | Check | Priority | Result | Notes |
+|---|---|---|---|---|
+| T1 | Standard `dataLayer.push` telemetry helper present on page | HIGH | | |
+| T2 | All primary and secondary CTAs track clicks with text, section, and target URL | HIGH | | |
+| T3 | Scroll depth milestone tracking configured (25%, 50%, 75%, 90%) | HIGH | | |
+| T4 | Lead form dispatches `form_submit_start` and `form_submit_success` | HIGH | | |
+| T5 | UTM parameters safely parsed into session storage and hidden form inputs | HIGH | | |
+| T6 | Zero PII (passwords, unhashed emails) exposed in telemetry payloads or URLs | CRITICAL | | |
+
+---
+
+## Category 9: Core Web Vitals & Performance
+
+| # | Check | Priority | Result | Notes |
+|---|---|---|---|---|
+| V1 | Layout shifts prevented: explicit aspect-ratio or dimensions on images/cards (CLS = 0) | CRITICAL | | |
+| V2 | Web fonts use `font-display: swap` and preconnect hints to avoid render blocking | HIGH | | |
+| V3 | Interactive scripts are deferred or placed at bottom of document | HIGH | | |
+| V4 | First Contentful Paint (FCP) and LCP optimized with no heavyweight third-party scripts | HIGH | | |
+
+---
+
+## Category 10: Automation Testing & QA Selectors
+
+| # | Check | Priority | Result | Notes |
+|---|---|---|---|---|
+| A1 | Every page section includes a resilient `data-testid="section-{name}"` selector | CRITICAL | | |
+| A2 | Primary and secondary CTAs have distinct `data-testid` attributes (e.g. `hero-primary-cta`, `nav-cta-btn`) | CRITICAL | | |
+| A3 | Lead capture form and all form inputs include unique `data-testid` attributes | CRITICAL | | |
+| A4 | Form submission button, honeypot, and feedback messages have explicit `data-testid` | HIGH | | |
+| A5 | Interactive widgets (tabs, calculator slider, theme toggle) include test selectors | HIGH | | |
+| A6 | FAQ accordion items and details/summary elements have indexed `data-testid="faq-item-{n}"` | HIGH | | |
+| A7 | Footer legal links and mobile sticky dock have dedicated `data-testid` selectors | MEDIUM | | |
 
 ---
 
@@ -125,10 +180,15 @@ A FAIL on any CRITICAL item means the output must be revised before delivery.
 |---|---|
 | All CRITICAL checks: PASS | |
 | All HIGH checks: PASS or REVIEW with note | |
+| Security & Honeypot validations verified | |
+| Telemetry & Attribution verified | |
+| Automation QA Selectors (`data-testid`) verified | |
 | Placeholder log complete | |
 | Credibility guard run (validators/credibility_guard.md) | |
-| Output ready for designer handoff | |
+| Output ready for designer, QA automation, and developer handoff | |
 
-*Checked by: [AI / Name]*
-*Date: [DATE]*
+*Checked by: [AI / Name]*  
+*Date: [DATE]*  
 *Version: [VERSION]*
+
+

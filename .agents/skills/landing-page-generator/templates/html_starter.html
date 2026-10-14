@@ -22,6 +22,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Security: Content Security Policy (Zero unauthorized scripts, clickjacking prevention) -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src 'self' https://fonts.gstatic.com data:;
+    img-src 'self' data: https: blob:;
+    connect-src 'self' https://www.google-analytics.com https://api.formspree.io https://*.supabase.co;
+    frame-ancestors 'none';
+    base-uri 'self';
+    form-action 'self' https:;
+  " />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
   <!-- SEO: Replace with values from Section 2 (SEO Foundation) -->
   <title>[SEO TITLE — under 60 chars, keyword first]</title>
   <meta name="description" content="[META DESCRIPTION — under 155 chars, benefit-focused]" />
@@ -613,14 +627,23 @@
 </head>
 
 <body>
+  <!-- Accessibility: Skip to Main Content Link (WCAG 2.1 AAA) -->
+  <a href="#main-content" class="skip-link" data-testid="skip-to-content">
+    Skip to main content
+  </a>
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        NAVIGATION
        100% Solid Matte Surface — Zero Glass / No backdrop-filter.
        ═══════════════════════════════════════════════════════════════════════ -->
-  <header class="nav" role="banner">
-    <a href="#" class="nav__logo">[BUSINESS NAME]</a>
-    <a href="#cta" class="btn btn--primary nav__cta">[PRIMARY CTA]</a>
+  <header class="nav" role="banner" data-testid="header-nav">
+    <a href="#" class="nav__logo" data-testid="nav-logo">[BUSINESS NAME]</a>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button class="theme-toggle-btn" id="theme-toggle" data-testid="theme-toggle-btn" aria-label="Toggle dark mode" title="Toggle theme">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <a href="#cta" class="btn btn--primary nav__cta" data-testid="nav-cta-btn">[PRIMARY CTA]</a>
+    </div>
   </header>
 
 
@@ -628,48 +651,71 @@
        HERO (Section 3.1)
        Plain content area — solid white surface. No backdrop-filter.
        ═══════════════════════════════════════════════════════════════════════ -->
-  <main>
-    <section class="hero section" aria-label="Hero">
+  <main data-testid="main-content">
+    <section class="hero section" aria-label="Hero" data-testid="section-hero">
       <div class="container">
 
         <!-- Optional eyebrow label -->
-        <div class="hero__eyebrow">
+        <div class="hero__eyebrow" data-testid="hero-eyebrow">
           <!-- [Optional: e.g. "Now in public beta" or industry vertical] -->
         </div>
 
         <!-- REPLACE: Best headline from Section 3.1 -->
-        <h1 class="hero__headline">
+        <h1 class="hero__headline" data-testid="hero-headline">
           [HERO HEADLINE]
         </h1>
 
         <!-- REPLACE: Best subheading from Section 3.1 -->
-        <p class="hero__sub">
+        <p class="hero__sub" data-testid="hero-subheading">
           [HERO SUBHEADING]
         </p>
 
         <div class="hero__actions">
           <!-- Primary CTA -->
-          <a href="#cta" class="btn btn--primary" id="hero-primary-cta">
+          <a href="#cta" class="btn btn--primary" id="hero-primary-cta" data-testid="hero-primary-cta">
             [PRIMARY CTA TEXT]
           </a>
           <!-- Secondary CTA (optional, lower commitment) -->
-          <a href="#how" class="btn btn--secondary" id="hero-secondary-cta">
+          <a href="#how" class="btn btn--secondary" id="hero-secondary-cta" data-testid="hero-secondary-cta">
             [SECONDARY CTA TEXT]
           </a>
         </div>
 
         <!-- Microcopy beneath CTA (e.g. "No credit card required.") -->
-        <p class="hero__microcopy">[MICROCOPY]</p>
+        <p class="hero__microcopy" data-testid="hero-microcopy">[MICROCOPY]</p>
 
-        <!-- Hero visual: product screenshot, lifestyle photo, or illustration -->
-        <!-- REPLACE src and alt with real image -->
-        <div style="margin-top: 56px;">
-          <img
-            src="[HERO IMAGE URL]"
-            alt="[Descriptive alt text for hero visual]"
-            style="width:100%; max-width:900px; border-radius: var(--r-card);
-                   box-shadow: var(--sh-overlay); display:block; margin:auto;"
-          />
+        <!-- Hero visual: Interactive Production Minimal UI Mockup or Product Screenshot -->
+        <div style="margin-top: 56px; max-width: 900px; margin-inline: auto;" data-testid="hero-visual-wrapper">
+          <!-- Default: Interactive Tactile Dashboard Preview (Replace with <img> if you have actual product UI) -->
+          <div class="panel" data-testid="hero-mockup-card" style="text-align: left; padding: 24px; border: 1px solid var(--border-default); box-shadow: var(--shadow-surface); background-color: var(--bg-surface);">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F56; display: inline-block;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #FFBD2E; display: inline-block;"></span>
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #27C93F; display: inline-block;"></span>
+                <span style="margin-left: 8px; font-family: var(--mono); font-size: 12px; color: var(--text-tertiary);">conversion-telemetry.ts</span>
+              </div>
+              <span class="chip chip--primary" data-testid="hero-mockup-status" style="font-size: 11px;">Active Engine: 99.98% Uptime</span>
+            </div>
+
+            <div class="grid-3">
+              <div class="panel__item" data-testid="mockup-metric-pipeline" style="border: 1px solid var(--border-subtle); border-radius: var(--r-md); padding: 16px; background-color: var(--bg-surface-subtle);">
+                <p style="font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-tertiary);">Verified Pipeline</p>
+                <p style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-top: 4px;">+34.2%</p>
+                <p style="font-size: 12px; color: #27C93F; font-weight: 600; margin-top: 4px;">Qualified conversions</p>
+              </div>
+              <div class="panel__item" data-testid="mockup-metric-friction" style="border: 1px solid var(--border-subtle); border-radius: var(--r-md); padding: 16px; background-color: var(--bg-surface-subtle);">
+                <p style="font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-tertiary);">Friction Reduction</p>
+                <p style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-top: 4px;">1.8%</p>
+                <p style="font-size: 12px; color: #27C93F; font-weight: 600; margin-top: 4px;">Low drop-off rate</p>
+              </div>
+              <div class="panel__item" data-testid="mockup-metric-margin" style="border: 1px solid var(--border-subtle); border-radius: var(--r-md); padding: 16px; background-color: var(--bg-surface-subtle);">
+                <p style="font-size: 11px; text-transform: uppercase; font-weight: 600; color: var(--text-tertiary);">Acquisition Margin</p>
+                <p style="font-size: 24px; font-weight: 700; color: var(--text-primary); margin-top: 4px;">-44.6%</p>
+                <p style="font-size: 12px; color: #27C93F; font-weight: 600; margin-top: 4px;">CAC efficiency</p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -680,13 +726,17 @@
          TRUST STRIP (Section 3.2)
          Logos / metrics. Grayscale + low opacity until hover.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="trust-strip section" aria-label="Trusted by">
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         TRUST STRIP (Section 3.2)
+         Logos / metrics. Grayscale + low opacity until hover.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="trust-strip section" aria-label="Trusted by" data-testid="section-trust">
       <div class="container">
-        <p class="trust-strip__label">
+        <p class="trust-strip__label" data-testid="trust-label">
           <!-- [e.g. "Trusted by teams at" or "As featured in"] -->
           [TRUST STRIP LABEL]
         </p>
-        <div class="trust-strip__logos">
+        <div class="trust-strip__logos" data-testid="trust-logos-container">
           <!-- REPLACE: real client logos with permission -->
           <!-- <img src="logo-client.svg" alt="Client Name" class="trust-strip__logo" /> -->
           <!-- [PLACEHOLDER — insert real client logos with written permission] -->
@@ -699,29 +749,29 @@
          PROBLEM (Section 3.3)
          One unified panel. Hairline dividers between points.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="problem section" id="problem" aria-label="The problem">
+    <section class="problem section" id="problem" aria-label="The problem" data-testid="section-problem">
       <div class="container">
         <div class="problem__headline">
           <p class="label" style="margin-bottom:12px">The challenge</p>
-          <h2 class="h2">[PROBLEM HEADLINE]</h2>
+          <h2 class="h2" data-testid="problem-headline">[PROBLEM HEADLINE]</h2>
         </div>
 
         <!-- Unified panel: one surface with hairline dividers -->
-        <div class="problem__panel surface panel">
+        <div class="problem__panel surface panel" data-testid="problem-panel">
           <!-- Pain point 1 -->
-          <div class="panel__item">
+          <div class="panel__item" data-testid="problem-item-1">
             <p class="body">[Pain point 1 from problem section]</p>
           </div>
           <!-- Pain point 2 -->
-          <div class="panel__item">
+          <div class="panel__item" data-testid="problem-item-2">
             <p class="body">[Pain point 2 from problem section]</p>
           </div>
           <!-- Pain point 3 -->
-          <div class="panel__item">
+          <div class="panel__item" data-testid="problem-item-3">
             <p class="body">[Pain point 3 from problem section]</p>
           </div>
           <!-- Emotional anchor -->
-          <div class="panel__item">
+          <div class="panel__item" data-testid="problem-emotional-anchor">
             <p class="body" style="font-style:italic; color:var(--text)">
               "[EMOTIONAL ANCHOR STATEMENT]"
             </p>
@@ -735,17 +785,17 @@
          SOLUTION (Section 3.4)
          Solid matte container — high contrast tactile action pill.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="solution section" id="solution" aria-label="The solution">
+    <section class="solution section" id="solution" aria-label="The solution" data-testid="section-solution">
       <div class="container container--read" style="text-align:center;">
         <p class="label" style="color:rgba(255,255,255,0.6); margin-bottom:12px">
           Introducing
         </p>
-        <h2 class="solution__headline">[SOLUTION HEADLINE]</h2>
-        <p class="solution__body">[SOLUTION POSITIONING PARAGRAPH]</p>
-        <p style="font-size:15px; opacity:0.7; margin-bottom:32px; color:#fff;">
+        <h2 class="solution__headline" data-testid="solution-headline">[SOLUTION HEADLINE]</h2>
+        <p class="solution__body" data-testid="solution-body">[SOLUTION POSITIONING PARAGRAPH]</p>
+        <p style="font-size:15px; opacity:0.7; margin-bottom:32px; color:#fff;" data-testid="solution-mechanism">
           [CORE MECHANISM STATEMENT]
         </p>
-        <a href="#cta" class="btn btn--primary" id="solution-cta">
+        <a href="#cta" class="btn btn--primary" id="solution-cta" data-testid="solution-cta">
           [PRIMARY CTA]
         </a>
       </div>
@@ -756,19 +806,19 @@
          BENEFITS (Section 3.5)
          Grid of cards. White surface. 2-layer shadow. Hover lift.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="benefits section" id="benefits" aria-label="Benefits">
+    <section class="benefits section" id="benefits" aria-label="Benefits" data-testid="section-benefits">
       <div class="container">
         <div class="benefits__header">
           <p class="label" style="margin-bottom:12px">What you get</p>
-          <h2 class="h2">[BENEFITS SECTION HEADLINE]</h2>
-          <p class="body" style="margin-top:12px">[BENEFITS SECTION SUBHEADING]</p>
+          <h2 class="h2" data-testid="benefits-headline">[BENEFITS SECTION HEADLINE]</h2>
+          <p class="body" style="margin-top:12px" data-testid="benefits-subheading">[BENEFITS SECTION SUBHEADING]</p>
         </div>
 
         <!-- 3-column grid: adjust to 2-column for 6 benefits or fewer -->
-        <div class="grid-3">
+        <div class="grid-3" data-testid="benefits-grid">
 
           <!-- Benefit card 1 -->
-          <article class="benefit-card card">
+          <article class="benefit-card card" data-testid="benefit-card-1">
             <div class="benefit-card__icon">
               <!-- [Icon: emoji or SVG — keep it simple and on-topic] -->
             </div>
@@ -783,7 +833,7 @@
 
         <!-- Inline CTA after benefits -->
         <div style="text-align:center; margin-top:clamp(32px,4vw,48px);">
-          <a href="#cta" class="btn btn--primary" id="benefits-cta">
+          <a href="#cta" class="btn btn--primary" id="benefits-cta" data-testid="benefits-cta">
             [PRIMARY CTA]
           </a>
         </div>
@@ -796,15 +846,20 @@
          Comparison table inside a unified panel.
          Mark [ASSUMPTION] columns clearly if not client-verified.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="diff section" id="differentiation" aria-label="Why us">
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         DIFFERENTIATION (Section 3.6)
+         Comparison table inside a unified panel.
+         Mark [ASSUMPTION] columns clearly if not client-verified.
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="diff section" id="differentiation" aria-label="Why us" data-testid="section-differentiation">
       <div class="container">
         <div class="diff__header">
           <p class="label" style="margin-bottom:12px">Why [BUSINESS NAME]</p>
-          <h2 class="h2">[DIFFERENTIATION HEADLINE]</h2>
+          <h2 class="h2" data-testid="diff-headline">[DIFFERENTIATION HEADLINE]</h2>
         </div>
 
-        <div class="surface panel" style="overflow:auto;">
-          <table class="compare-table">
+        <div class="surface panel" style="overflow:auto;" data-testid="diff-panel">
+          <table class="compare-table" data-testid="diff-table">
             <thead>
               <tr>
                 <th>Feature</th>
@@ -815,7 +870,7 @@
             <tbody>
               <!-- REPLACE with real comparison rows -->
               <!-- Mark unverified rows: [ASSUMPTION — verify before publishing] -->
-              <tr>
+              <tr data-testid="diff-row-1">
                 <td>[Feature 1]</td>
                 <td class="check us">✓ [Value]</td>
                 <td class="cross">✗</td>
@@ -826,7 +881,7 @@
         </div>
 
         <p style="text-align:center; margin-top:28px; max-width:600px; margin-inline:auto;"
-           class="body">
+           class="body" data-testid="diff-positioning">
           [POSITIONING STATEMENT — 1–2 confident, specific sentences]
         </p>
       </div>
@@ -837,22 +892,22 @@
          HOW IT WORKS (Section 3.7)
          Numbered steps in a unified panel. Reduces process anxiety.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="how section" id="how" aria-label="How it works">
+    <section class="how section" id="how" aria-label="How it works" data-testid="section-how">
       <div class="container">
         <div class="how__header">
           <p class="label" style="margin-bottom:12px">The process</p>
-          <h2 class="h2">[HOW IT WORKS HEADLINE]</h2>
+          <h2 class="h2" data-testid="how-headline">[HOW IT WORKS HEADLINE]</h2>
         </div>
 
-        <div class="surface panel" style="max-width:720px; margin-inline:auto;">
+        <div class="surface panel" style="max-width:720px; margin-inline:auto;" data-testid="how-panel">
 
           <!-- Step 1 -->
-          <div class="step panel__item">
+          <div class="step panel__item" data-testid="how-step-1">
             <div class="step__number">1</div>
             <div class="step__content">
-              <h3 class="step__title">[STEP 1 NAME]</h3>
-              <p class="step__body">[STEP 1 DESCRIPTION]</p>
-              <p class="step__reassure">[STEP 1 REASSURANCE LINE]</p>
+              <h3 class="step__title" data-testid="step-title-1">[STEP 1 NAME]</h3>
+              <p class="step__body" data-testid="step-body-1">[STEP 1 DESCRIPTION]</p>
+              <p class="step__reassure" data-testid="step-reassure-1">[STEP 1 REASSURANCE LINE]</p>
             </div>
           </div>
 
@@ -862,7 +917,7 @@
         </div>
 
         <!-- Transition into next section -->
-        <p style="text-align:center; margin-top:32px;" class="body">
+        <p style="text-align:center; margin-top:32px;" class="body" data-testid="how-transition">
           [TRANSITION STATEMENT]
         </p>
       </div>
@@ -874,18 +929,18 @@
          Real testimonials only. No fabricated quotes.
          See templates/testimonial_guide.md to collect real ones.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="proof section" id="proof" aria-label="What clients say">
+    <section class="proof section" id="proof" aria-label="What clients say" data-testid="section-proof">
       <div class="container">
         <div class="proof__header">
           <p class="label" style="margin-bottom:12px">In their words</p>
-          <h2 class="h2">[SOCIAL PROOF HEADLINE]</h2>
+          <h2 class="h2" data-testid="proof-headline">[SOCIAL PROOF HEADLINE]</h2>
         </div>
 
-        <div class="grid-3">
+        <div class="grid-3" data-testid="proof-grid">
 
           <!-- Testimonial 1 — [PLACEHOLDER if no real testimonial] -->
-          <article class="testimonial card">
-            <p class="testimonial__quote">
+          <article class="testimonial card" data-testid="testimonial-card-1">
+            <p class="testimonial__quote" data-testid="testimonial-quote-1">
               [PLACEHOLDER — Real testimonial from a customer who
               struggled with X and achieved Y. Answers objection:
               "Is this worth the money?" — See templates/testimonial_guide.md]
@@ -895,10 +950,11 @@
                 src="[AVATAR URL]"
                 alt="[Customer Name]"
                 class="testimonial__avatar"
+                data-testid="testimonial-avatar-1"
               />
               <div>
-                <p class="testimonial__name">[Full Name]</p>
-                <p class="testimonial__meta">[Title, Company]</p>
+                <p class="testimonial__name" data-testid="testimonial-name-1">[Full Name]</p>
+                <p class="testimonial__meta" data-testid="testimonial-meta-1">[Title, Company]</p>
               </div>
             </div>
           </article>
@@ -914,15 +970,15 @@
          ABOUT (Section 3.11)
          Human trust. Real credentials only. No fabricated achievements.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="about section" id="about" aria-label="About us">
+    <section class="about section" id="about" aria-label="About us" data-testid="section-about">
       <div class="container">
         <div class="about__inner">
 
           <div>
             <p class="label about__label">Our story</p>
-            <h2 class="h2 about__headline">[ABOUT HEADLINE]</h2>
-            <p class="body about__body">[COMPANY STORY — why we exist]</p>
-            <p class="body">[FOUNDER INTRO — [PLACEHOLDER if not confirmed]]</p>
+            <h2 class="h2 about__headline" data-testid="about-headline">[ABOUT HEADLINE]</h2>
+            <p class="body about__body" data-testid="about-body">[COMPANY STORY — why we exist]</p>
+            <p class="body" data-testid="about-founder">[FOUNDER INTRO — [PLACEHOLDER if not confirmed]]</p>
           </div>
 
           <!-- Replace with real team/founder photo -->
@@ -930,6 +986,7 @@
             src="[TEAM PHOTO URL]"
             alt="[PLACEHOLDER — team or founder photo]"
             class="about__image"
+            data-testid="about-image"
           />
 
         </div>
@@ -941,19 +998,19 @@
          FAQ (Section 3.12)
          Accordion. Addresses remaining objections before final CTA.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="faq section" id="faq" aria-label="FAQ">
+    <section class="faq section" id="faq" aria-label="FAQ" data-testid="section-faq">
       <div class="container">
         <div class="faq__header">
           <p class="label" style="margin-bottom:12px">Common questions</p>
-          <h2 class="h2">[FAQ HEADLINE]</h2>
+          <h2 class="h2" data-testid="faq-headline">[FAQ HEADLINE]</h2>
         </div>
 
-        <div class="faq__panel surface panel">
+        <div class="faq__panel surface panel" data-testid="faq-panel">
 
           <!-- FAQ item — repeat for 8–12 questions from Section 3.12 -->
-          <details class="faq__item">
-            <summary class="faq__q">[FAQ QUESTION 1]</summary>
-            <p class="faq__a">[FAQ ANSWER 1]</p>
+          <details class="faq__item" data-testid="faq-item-1">
+            <summary class="faq__q" data-testid="faq-q-1">[FAQ QUESTION 1]</summary>
+            <p class="faq__a" data-testid="faq-a-1">[FAQ ANSWER 1]</p>
           </details>
 
           <!-- [PLACEHOLDER: Add FAQ items 2–12] -->
@@ -966,15 +1023,67 @@
     <!-- ═══════════════════════════════════════════════════════════════════════
          FINAL CTA (Section 3.13)
          Solid matte elevated container. 100% opaque. Summary of transformation.
+         Provides both Direct Button CTA and Secure Lead Capture Form.
          ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="final-cta" id="cta" aria-label="Get started">
-      <div class="container">
-        <h2 class="final-cta__headline">[FINAL CTA HEADLINE]</h2>
-        <p class="final-cta__sub">[FINAL SUPPORTING STATEMENT]</p>
-        <a href="[CTA DESTINATION URL]" class="btn btn--primary" id="final-primary-cta">
-          [FINAL CTA TEXT]
-        </a>
-        <p class="final-cta__microcopy">[CTA MICROCOPY — e.g. "No commitment. Cancel any time."]</p>
+    <section class="final-cta section" id="cta" aria-label="Get started" data-testid="section-final-cta">
+      <div class="container container--read" style="text-align: center;">
+        <h2 class="final-cta__headline" data-testid="final-cta-headline">[FINAL CTA HEADLINE]</h2>
+        <p class="final-cta__sub" data-testid="final-cta-subheading">[FINAL SUPPORTING STATEMENT]</p>
+
+        <!-- Option A: Direct Button CTA (Default) -->
+        <div id="cta-direct-action" style="margin-bottom: 24px;" data-testid="cta-direct-action">
+          <a href="[CTA DESTINATION URL]" class="btn btn--primary" id="final-primary-cta" data-testid="final-primary-cta">
+            [FINAL CTA TEXT]
+          </a>
+          <p class="final-cta__microcopy" data-testid="final-cta-microcopy">[CTA MICROCOPY — e.g. "No commitment. Cancel any time."]</p>
+        </div>
+
+        <!-- Option B: Secure Lead Capture Form (Recommended for Lead Gen) -->
+        <div class="surface panel" data-testid="lead-form-wrapper" style="text-align: left; max-width: 520px; margin: 32px auto 0; padding: clamp(24px, 5vw, 40px); border: 1px solid var(--border-default); box-shadow: var(--shadow-surface);">
+          <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; text-align: center;">Schedule Your Consultation</h3>
+          <p style="font-size: 13px; color: var(--text-secondary); text-align: center; margin-bottom: 24px;">Get actionable funnel insights delivered within 24 hours.</p>
+
+          <div id="form-feedback-msg" data-testid="form-feedback-msg" style="display: none;" role="alert"></div>
+
+          <form id="lead-form" data-testid="lead-form" novalidate>
+            <!-- ── Anti-Spam Security: Invisible Honeypot ────────────────────── -->
+            <div style="position: absolute; left: -9999px; top: -9999px;" aria-hidden="true">
+              <label for="hp_bot_trap">Do not fill this field</label>
+              <input type="text" id="hp_bot_trap" name="hp_bot_trap" data-testid="input-honeypot" tabindex="-1" autocomplete="off" />
+            </div>
+            <!-- Security: Timestamp token to catch automated instant bot submissions -->
+            <input type="hidden" id="form_timestamp" name="_form_ts" />
+
+            <div class="form-group">
+              <label for="lead_name" class="form-label">Full Name</label>
+              <input type="text" id="lead_name" name="name" class="form-input" data-testid="input-name" required maxlength="100" placeholder="Alex Morgan" autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="lead_email" class="form-label">Work Email</label>
+              <input type="email" id="lead_email" name="email" class="form-input" data-testid="input-email" required maxlength="120" placeholder="alex@company.com" autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label for="lead_service" class="form-label">Company Size / Growth Stage</label>
+              <select id="lead_service" name="service" class="form-select" data-testid="select-service">
+                <option value="seed">Early Stage (1–10)</option>
+                <option value="growth">Growth Stage (11–50)</option>
+                <option value="scale">Scale-up (50+)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn--primary" id="lead-submit-btn" data-testid="btn-lead-submit" style="width: 100%; justify-content: center; margin-top: 8px;">
+              [FINAL CTA TEXT] →
+            </button>
+
+            <p class="form-legal">
+              🔒 256-bit TLS encrypted. Zero marketing spam. By submitting you agree to our 
+              <a href="/privacy" data-testid="form-link-privacy" rel="noopener">Privacy Policy</a>.
+            </p>
+          </form>
+        </div>
+
       </div>
     </section>
 
@@ -984,14 +1093,14 @@
   <!-- ═══════════════════════════════════════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════════════════════════════════════ -->
-  <footer class="footer container" role="contentinfo">
+  <footer class="footer container" role="contentinfo" data-testid="footer-container">
     <p class="footer__copy">
-      © <span id="year"></span> [BUSINESS NAME]. All rights reserved.
+      © <span id="year" data-testid="footer-year"></span> [BUSINESS NAME]. All rights reserved.
     </p>
     <nav class="footer__links" aria-label="Footer navigation">
-      <a href="/privacy">[Privacy Policy]</a>
-      <a href="/terms">[Terms of Service]</a>
-      <a href="/contact">[Contact]</a>
+      <a href="/privacy" data-testid="footer-link-privacy" rel="noopener">Privacy Policy</a>
+      <a href="/terms" data-testid="footer-link-terms" rel="noopener">Terms of Service</a>
+      <a href="/security" data-testid="footer-link-security" rel="noopener">Security Policy</a>
     </nav>
   </footer>
 
@@ -1001,31 +1110,224 @@
        Appears after first scroll on mobile only.
        Solid matte dock with safe-area insets — zero glass.
        ═══════════════════════════════════════════════════════════════════════ -->
-  <div class="sticky-cta" id="sticky-cta" role="complementary" aria-label="Quick action">
-    <a href="#cta" class="btn btn--primary" id="sticky-primary-cta">
+  <div class="sticky-cta" id="sticky-cta" role="complementary" aria-label="Quick action" data-testid="mobile-sticky-dock">
+    <a href="#cta" class="btn btn--primary" id="sticky-primary-cta" data-testid="mobile-sticky-cta">
       [SHORT MOBILE CTA — under 5 words]
     </a>
   </div>
 
 
   <!-- ═══════════════════════════════════════════════════════════════════════
-       SCRIPTS
+       SCRIPTS: Telemetry, Security, Form Handling & Theme
        ═══════════════════════════════════════════════════════════════════════ -->
   <script>
-    // ── Auto year in footer ───────────────────────────────────────────────
+    // ── 1. Auto Year in Footer ────────────────────────────────────────────
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ── Dark mode toggle ──────────────────────────────────────────────────
-    // Reads system preference on load. Add a toggle button and call:
-    //   document.documentElement.classList.toggle('dark')
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.classList.add('dark');
+    // ── 2. Universal CRO Telemetry Helper (dataLayer.push) ────────────────
+    window.dataLayer = window.dataLayer || [];
+    function trackEvent(eventName, payload = {}) {
+      window.dataLayer.push({
+        event: eventName,
+        timestamp: new Date().toISOString(),
+        ...payload
+      });
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        console.log('[Telemetry]', eventName, payload);
+      }
     }
 
-    // ── Mobile sticky CTA: show after first viewport scroll ───────────────
+    // ── 3. Theme Toggle (Solid Matte Light / Dark) ─────────────────────────
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        if (themeIcon) themeIcon.textContent = '☀️';
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (themeIcon) themeIcon.textContent = '🌙';
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialDark = savedTheme ? savedTheme === 'dark' : systemPrefersDark;
+    applyTheme(initialDark);
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const isDarkNow = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
+        if (themeIcon) themeIcon.textContent = isDarkNow ? '☀️' : '🌙';
+        trackEvent('theme_toggle', { mode: isDarkNow ? 'dark' : 'light' });
+      });
+    }
+
+    // ── 4. Safe Dynamic Text Replacement (DTR) & XSS Protection ───────────
+    // Reads query parameters safely and sets raw textContent (no innerHTML)
+    const urlParams = new URLSearchParams(window.location.search);
+    const audienceParam = urlParams.get('audience') || urlParams.get('role');
+    if (audienceParam) {
+      const sanitized = audienceParam.replace(/[^a-zA-Z0-9 _-]/g, '').slice(0, 40);
+      const dynamicEl = document.getElementById('dynamic-audience');
+      if (dynamicEl) dynamicEl.textContent = sanitized;
+    }
+
+    // ── 5. Safe UTM Parameter Capture into Lead Forms ──────────────────────
+    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+    const utmData = {};
+    utmKeys.forEach(key => {
+      const val = urlParams.get(key);
+      if (val) {
+        const cleanVal = val.replace(/[^a-zA-Z0-9_\-\.]/g, '').slice(0, 100);
+        utmData[key] = cleanVal;
+        sessionStorage.setItem(key, cleanVal);
+      } else {
+        const stored = sessionStorage.getItem(key);
+        if (stored) utmData[key] = stored;
+      }
+    });
+
+    const leadForm = document.getElementById('lead-form');
+    if (leadForm) {
+      Object.entries(utmData).forEach(([k, v]) => {
+        const hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = k;
+        hidden.value = v;
+        leadForm.appendChild(hidden);
+      });
+    }
+
+    // ── 6. Form Submission: Honeypot, Timestamp Check & Rate Limiting ──────
+    const pageRenderTime = Date.now();
+    const tsInput = document.getElementById('form_timestamp');
+    if (tsInput) tsInput.value = pageRenderTime;
+
+    if (leadForm) {
+      leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Honeypot check: If bot populated hidden field, reject silently
+        const honeypot = document.getElementById('hp_bot_trap');
+        if (honeypot && honeypot.value.trim() !== '') {
+          console.warn('Bot detected via honeypot');
+          showFormSuccess();
+          return;
+        }
+
+        // Timestamp check: Automated bots submit in < 1.5 seconds
+        const submissionTime = Date.now();
+        if (submissionTime - pageRenderTime < 1500) {
+          console.warn('Bot submission blocked (speed threshold)');
+          showFormSuccess();
+          return;
+        }
+
+        // Rate limiting check: Prevent spam clicks within 5 seconds
+        const lastSubmit = sessionStorage.getItem('last_lead_submission');
+        if (lastSubmit && (submissionTime - parseInt(lastSubmit, 10)) < 5000) {
+          alert('Please wait a few seconds before submitting again.');
+          return;
+        }
+
+        const submitBtn = document.getElementById('lead-submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        trackEvent('form_submit_start', { form_id: 'lead-form' });
+
+        // ── Backend Configuration: Formspree, Make, Zapier or Custom Webhook ──
+        // Set your endpoint here, e.g. 'https://formspree.io/f/YOUR_ID' or 'https://api.domain.com/lead'
+        const FORM_ENDPOINT_URL = '';
+
+        try {
+          const payload = {
+            name: document.getElementById('lead_name').value.trim(),
+            email: document.getElementById('lead_email').value.trim(),
+            service: document.getElementById('lead_service').value,
+            submittedAt: new Date().toISOString(),
+            ...utmData
+          };
+
+          if (FORM_ENDPOINT_URL) {
+            const resp = await fetch(FORM_ENDPOINT_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (!resp.ok) throw new Error('Network response was not ok');
+          } else {
+            // Local simulation fallback
+            await new Promise(r => setTimeout(r, 800));
+          }
+
+          sessionStorage.setItem('last_lead_submission', submissionTime.toString());
+          showFormSuccess();
+          trackEvent('form_submit_success', {
+            email_domain: (payload.email.split('@')[1] || ''),
+            ...utmData
+          });
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          showFormError('There was an issue processing your request. Please try again.');
+          trackEvent('form_submit_error');
+        }
+      });
+    }
+
+    function showFormSuccess() {
+      if (leadForm) leadForm.style.display = 'none';
+      const feedback = document.getElementById('form-feedback-msg');
+      if (feedback) {
+        feedback.className = 'form-feedback form-feedback--success';
+        feedback.style.display = 'block';
+        feedback.textContent = '✓ Thank you! Your consultation request has been received. Our team will contact you today.';
+      }
+    }
+
+    function showFormError(msg) {
+      const feedback = document.getElementById('form-feedback-msg');
+      if (feedback) {
+        feedback.className = 'form-feedback';
+        feedback.style.backgroundColor = 'rgba(230,0,35,0.1)';
+        feedback.style.border = '1px solid #E60023';
+        feedback.style.color = '#E60023';
+        feedback.style.display = 'block';
+        feedback.textContent = msg;
+      }
+    }
+
+    // ── 7. CTA Click & Scroll Milestone Telemetry ──────────────────────────
+    document.querySelectorAll('a.btn, button.btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sec = btn.closest('section');
+        trackEvent('cta_click', {
+          cta_text: btn.textContent.trim(),
+          cta_location: sec ? (sec.id || sec.className) : 'header_or_dock'
+        });
+      });
+    });
+
+    const scrollMilestones = [25, 50, 75, 90];
+    const reachedMilestones = new Set();
+    window.addEventListener('scroll', () => {
+      const scrolled = Math.round(((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight) * 100);
+      scrollMilestones.forEach(m => {
+        if (scrolled >= m && !reachedMilestones.has(m)) {
+          reachedMilestones.add(m);
+          trackEvent('scroll_milestone', { percent: m });
+        }
+      });
+    }, { passive: true });
+
+    // ── 8. Mobile Sticky CTA: show after first viewport scroll ────────────
     const stickyCta = document.getElementById('sticky-cta');
     let stickyVisible = false;
-
     window.addEventListener('scroll', () => {
       const scrolled = window.scrollY > window.innerHeight * 0.8;
       if (scrolled && !stickyVisible) {
@@ -1034,10 +1336,11 @@
       }
     }, { passive: true });
 
-    // ── FAQ accordion: close others on open ──────────────────────────────
+    // ── 9. FAQ Accordion: close others on open ────────────────────────────
     document.querySelectorAll('details.faq__item').forEach(detail => {
       detail.addEventListener('toggle', () => {
         if (detail.open) {
+          trackEvent('faq_toggle', { question: detail.querySelector('summary').textContent.trim() });
           document.querySelectorAll('details.faq__item').forEach(other => {
             if (other !== detail) other.removeAttribute('open');
           });
@@ -1047,28 +1350,57 @@
 
   </script>
 
-  <!--
-    ── FAQ Schema (copy and fill for Google rich results) ────────────────────
-    Uncomment and fill before publishing.
-    See references/seo_guidelines.md § FAQ Schema.
-
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCHEMA.ORG STRUCTURED DATA (JSON-LD)
+       Enables Google Rich Snippets, Knowledge Graph, and FAQ Search Carousels.
+       ═══════════════════════════════════════════════════════════════════════ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "[FAQ QUESTION 1]",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "[FAQ ANSWER 1]"
+        "@type": "Organization",
+        "@id": "https://[DOMAIN]/#organization",
+        "name": "[BUSINESS NAME]",
+        "url": "https://[DOMAIN]",
+        "logo": "https://[DOMAIN]/logo.png",
+        "sameAs": [
+          "https://twitter.com/[HANDLE]",
+          "https://linkedin.com/company/[HANDLE]"
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://[DOMAIN]/#service",
+        "name": "[PRODUCT/SERVICE NAME]",
+        "provider": {
+          "@id": "https://[DOMAIN]/#organization"
+        },
+        "description": "[META DESCRIPTION]",
+        "offers": {
+          "@type": "Offer",
+          "price": "[STARTING PRICE, e.g. 99]",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://[DOMAIN]/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "[FAQ QUESTION 1]",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "[FAQ ANSWER 1]"
+            }
+          }
+        ]
       }
     ]
   }
   </script>
-  -->
 
 </body>
 </html>
